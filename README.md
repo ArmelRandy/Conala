@@ -10,12 +10,12 @@ obtained by crawling Stack Overflow. It is available on Hugging Face Hub under t
 
 # Table
 1. [Overview of the method](#overview)
-  - [The problem](#the-problem)
-  - [Our approach](#our-approach)
+    - [The problem](#the-problem)
+    - [Our approach](#our-approach)
 2. [Quickstart](#quickstart)
-  - [Step by step installation with conda](#step-by-step-installation-with-conda)
-  - [Training](#training)
-  - [Inference](#inference)
+    - [Step by step installation with conda](#step-by-step-installation-with-conda)
+    - [Training](#training)
+    - [Inference](#inference)
 3. [Acknowledgements](#acknowledgments)
 
 # Overview
