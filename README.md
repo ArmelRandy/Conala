@@ -53,6 +53,52 @@ We used conala-curated training and test set as our task's training and validati
 In this section, we describe how to train a translator/transcriber and how to make the inference as fast as possible with the help of 🤗's [accelerate](https://github.com/huggingface/accelerate)
 
 ## Step by step installation with conda
+Create a new conda environment and activate it
+```bash
+conda create -n env
+conda activate env
+```
+Install the `pytorch` version compatible with your version of cuda [here](https://pytorch.org/get-started/previous-versions/), for example the following command works with cuda 11.6
+```bash
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
+```
+Install `transformers` and `peft`
+```bash
+conda install -c huggingface transformers 
+pip install git+https://github.com/huggingface/peft.git
+```
+Note that you can install the latest stable version of transformers by using
+
+```bash
+pip install git+https://github.com/huggingface/transformers
+```
+
+Install `datasets`, `accelerate` and `huggingface_hub`
+
+```bash
+conda install -c huggingface -c conda-forge datasets
+conda install -c conda-forge accelerate
+conda install -c conda-forge huggingface_hub
+```
+
+Finally, install `bitsandbytes` and `wandb`
+```bash
+pip install bitsandbytes
+pip install wandb
+```
+To get the full list of arguments with descriptions you can run the following command on any script:
+```
+python scripts/some_script.py --help
+```
+Before you run any of the scripts make sure you are logged in and can push to the hub:
+```bash
+huggingface-cli login
+```
+Make sure you are logged in `wandb`:
+```bash
+wandb login
+```
+Now that everything is done, you can clone the repository and get into the corresponding directory.
 
 ## Training
 Our training procedure makes use of the 🤗[PEFT](https://github.com/huggingface/peft) library to perform parameter-efficient fine-tuning. This is particularly important as UL2 is a 20B parameter model.
@@ -80,7 +126,8 @@ The burden of the translation of conala is concentrated on the training procedur
 could require because we have 600K rewritten intents to recover. The command to run the inference on the whole conala-mined is
 
 ```
-accelerate launch inference.py
+accelerate launch inference.py \
+    --model_name_or_path="<your-merged-checkpoint>" \
 ```
 The predictions are going to be saved in a json file.
 
