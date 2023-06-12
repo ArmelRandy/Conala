@@ -121,6 +121,16 @@ accelerate launch training.py \
 ```
 The code was specifically written for the purpose of conala but it is robust to a change in the model used. Feel free to try using any seq2seqLM e.g. T5, BART etc.
 
+You can now convert your peft checkpoint into a normal checkpoint by merging the adapter layers. For someone using UL2 and who wants to merge the 
+checkpoint 1000, the command would look like this
+
+```bash
+python finetune/merge_peft_adapters.py \
+    --model_name_or_path google/ul2 \
+    --peft_model_path ul2-finetuned-conala/checkpoint-1000 \
+    --push_to_hub \
+```
+
 ## Inference
 The burden of the translation of conala is concentrated on the training procedure. Nevertheless, the inference is to take care of. It has to be done properly in order to alleviate the time it
 could require because we have 600K rewritten intents to recover. The command to run the inference on the whole conala-mined is
@@ -128,8 +138,9 @@ could require because we have 600K rewritten intents to recover. The command to 
 ```
 accelerate launch inference.py \
     --model_name_or_path="<your-merged-checkpoint>" \
+    --batch_size 8 \
 ```
-The predictions are going to be saved in a json file.
+The predictions will be saved in a json file.
 
 # Acknowledgments
 - [CoNaLa: The Code/Natural Language Challenge](https://conala-corpus.github.io)
