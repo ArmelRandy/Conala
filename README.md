@@ -5,8 +5,8 @@ A repository on how to perform a completion of the conala-corpus.
 # What is this about?
 This repository is dedicated to the effort of creating an instruction dataset based on the [conala-corpus](https://conala-corpus.github.io). As a matter of fact, conala is a dataset 
 obtained by crawling Stack Overflow. It is available on Hugging Face Hub under the name [neulab/conala](https://huggingface.co/datasets/neulab/conala). The dataset is divided into 2 parts :
-- **curated** : It contains high quality data and is divided into a training set and a test set. 
-- **mined** : It contains the data that we not processed and so they are likely to be noisier. This represents the biggest part of the whole corpus.
+- **Curated** : It contains high quality data and is divided into a training set and a test set. 
+- **Mined** : It contains the data that we not processed and so they are likely to be noisier. This represents the biggest part of the whole corpus.
 
 # Table
 1. [Overview of the method](#overview)
