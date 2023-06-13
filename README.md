@@ -132,6 +132,7 @@ python finetune/merge_peft_adapters.py \
     --peft_model_path ul2-finetuned-conala/checkpoint-1000 \
     --push_to_hub \
 ```
+In our case, we used 8 A100 GPUs (80G) and trained for 1000 steps.
 
 ## Inference
 The burden of the translation of conala is concentrated on the training procedure. Nevertheless, the inference is to take care of. It has to be done properly in order to alleviate the time it
