@@ -40,10 +40,12 @@ provided column *intent*. Another important thing that is mentionned in its desc
 Which means that we can not expect to reconstruct the *rewrittent_intent* by solely relying on the *intent*. We then have the idea to create a mapping [intent + snippet] -> rewritten_intent.
 
 We did that mapping by fine-tuning a LLM, namely [google-ul2](https://huggingface.co/google/ul2) on the sequence to sequence task that we created
+- Input sequence
 ```
-### Input
 <intent>+"\n"+<snippet>
-### Output
+```
+- Output sequence
+```
 <rewritten_intent>
 ```
 We used conala-curated training and test set as our task's training and validation set respectively.
