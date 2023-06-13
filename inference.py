@@ -37,8 +37,9 @@ if __name__ == "__main__" :
     model=model = AutoModelForSeq2SeqLM.from_pretrained(args.model_name_or_path)
     model = model.to(accelerator.device)
     dataset = load_dataset("neulab/conala", "mined")
-
-    for start in tqdm(range(0, 600000, args.batch_size)):
+    total = len(dataset["train"])
+    
+    for start in tqdm(range(0, total, args.batch_size)):
         end = start+args.batch_size
         sentences = [intent+"\n"+snippet for (intent, snippet) in zip( dataset["train"]["intent"][start:end], dataset["train"]["snippet"][start:end] )]
         train_data = TokenizedDataset(tokenizer, sentences)
@@ -71,7 +72,7 @@ if __name__ == "__main__" :
                             for prompt in decoded_outputs :
                                 fout.write(
                                     json.dumps(
-                                        {"instruction" : prompt}
+                                        {"rewritten_intent" : prompt}
                                     )+"\n"
                             )
         duration = time.time() - start_time
